@@ -10,7 +10,7 @@
             @csrf
 
             <div>
-                <x-label for="name" value="{{ __('Name') }}" />
+                <x-label for="name" value="{{ __('Nick') }}" />
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             </div>
 
@@ -20,13 +20,26 @@
             </div>
 
             <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
+                <x-label for="voievodeship" value="{{ __('Województwo') }}" />
+                <select id="voievodeship" class="block mt-1 w-full" name="voievodeship" :value="old('voievodeship')">
+                    <option value="dolnośląskie">Dolnośląskie</option>
+                    <option value="kujawsko-pomorskie">Kujawsko-pomorskie</option>
+                </select>
+            </div>
+
+            <div class="mt-4">
+                <x-label for="password" value="{{ __('Hasło') }}" />
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
             </div>
 
             <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
+                <x-label for="password_confirmation" value="{{ __('Potwierdź hasło') }}" />
                 <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="shoe_number" value="{{ __('Numer buta (opcjonalnie)') }}" />
+                <x-input id="shoe_number" class="block mt-1 w-full" type="text" name="shoe_number" :value="old('shoe_number')" required autofocus autocomplete="shoe_number" />
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
