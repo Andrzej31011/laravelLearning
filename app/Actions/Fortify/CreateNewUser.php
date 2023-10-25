@@ -23,6 +23,8 @@ class CreateNewUser implements CreatesNewUsers
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
+            'voievodeship' => ['required', 'min:1'],
+            'shoe_number' => ['numeric', 'nullable'],
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
 
@@ -30,6 +32,8 @@ class CreateNewUser implements CreatesNewUsers
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+            'voievodeship' => $input['voievodeship'],
+            'shoe_number' => $input['shoe_number'],
         ]);
     }
 }

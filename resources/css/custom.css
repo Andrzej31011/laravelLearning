@@ -1,0 +1,36 @@
+/* Dodaj niestandardowe style CSS dla paska postępu */
+#password-strength-meter {
+    width: 100%;
+    height: 20px;
+}
+
+/* Dodaj niestandardowe style CSS dla tekstu informacyjnego o sile hasła */
+#password-strength-text {
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+/* Kolor paska postępu dla Very Weak */
+#password-strength-meter[value="0"]::-webkit-progress-value {
+    background-color: #e53e3e; /* Tailwind red-500 */
+}
+
+/* Kolor paska postępu dla Weak */
+#password-strength-meter[value="1"]::-webkit-progress-value {
+    background-color: #e53e3e; /* Tailwind red-500 */
+}
+
+/* Kolor paska postępu dla Fair */
+#password-strength-meter[value="2"]::-webkit-progress-value {
+    background-color: #d69e2e; /* Tailwind yellow-500 */
+}
+
+/* Kolor paska postępu dla Good */
+#password-strength-meter[value="3"]::-webkit-progress-value {
+    background-color: #4299e1; /* Tailwind blue-500 */
+}
+
+/* Kolor paska postępu dla Strong */
+#password-strength-meter[value="4"]::-webkit-progress-value {
+    background-color: #38a169; /* Tailwind green-500 */
+}
