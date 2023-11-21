@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\WeatherController;
+use App\Http\Controllers\PaymentController;
             
 
 /*
@@ -31,6 +35,21 @@ Route::middleware([
     Route::get('/services', [ServiceController::class, 'index'])->name('services');
     Route::post('/services', [ServiceController::class, 'store'])->name('services.store');
     Route::get('services/export/', [ServiceController::class, 'export'])->name('services.export');
+
+    Route::get('/orders', [OrdersController::class, 'index'])->name('orders');//do usuniecia
+
+    Route::get('/cart', [CartController::class, 'showCart'])->name('showCart');
+
+    Route::post('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('addToCart');
+    Route::get('/clear-cart', [CartController::class, 'clearCart'])->name('clearCart');
+
+    //Płatności
+    Route::get('/formularz-płatności', [PaymentController::class, 'index'])->name('formularz.platnosci');
+
+    //Mapy
+    Route::get('/map', [WeatherController::class, 'index'])->name('weather');
+
+    
 
 
 });

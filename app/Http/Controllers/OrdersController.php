@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Order;
 
 class OrdersController extends Controller
 {
@@ -11,7 +12,7 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        //
+        return view('orders.index');
     }
 
     /**
