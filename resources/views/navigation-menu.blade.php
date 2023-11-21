@@ -18,10 +18,17 @@
                     <x-nav-link href="{{ route('services') }}" :active="request()->routeIs('services')">
                         {{ __('Usługi') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('showCart') }}" :active="request()->routeIs('showCart')">
+                        {{ __('Zamówienia') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('weather') }}" :active="request()->routeIs('weather')">
+                        {{ __('Mapa') }}
+                    </x-nav-link>
                 </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
+                @livewire('cart-modal')
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                     <div class="ml-3 relative">

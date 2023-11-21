@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ab5b026fa5f7fbdb20776f28befe1301",
+    "content-hash": "ad7918223acf783ec5be2b35dc0e3c19",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -2540,6 +2540,7 @@
             "time": "2022-12-02T22:17:43+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "mobiledetect/mobiledetectlib",
             "version": "4.8.04",
             "source": {
