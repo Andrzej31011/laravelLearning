@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('service_id')->constrained();
             $table->integer('quantity');
             $table->timestamp('order_date')->nullable();
+            $table->foreignId('order_details_id');
             $table->timestamps();
         });
     }

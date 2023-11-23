@@ -15,6 +15,7 @@ class Order extends Model
         'user_id',
         'service_id',
         'quantity',
-        'order_date'
+        'order_date',
+        'order_details_id',
     ];
 }

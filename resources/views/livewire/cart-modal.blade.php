@@ -25,7 +25,7 @@
                             </div>
                         </div>
                         @php
-                            $total += $details['price'];    
+                            $total += $details['price']*$details['quantity'];    
                         @endphp
                     @endforeach
                 </div>
