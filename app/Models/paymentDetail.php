@@ -17,4 +17,8 @@ class paymentDetail extends Model
         'surname',
         'cost',
     ];
+    
+    public function ordersDetails() {
+        return $this->hasMany(OrdersDetail::class, 'id_payment_method');
+    }
 }

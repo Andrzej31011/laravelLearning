@@ -23,4 +23,12 @@ class OrdersDetail extends Model
         'delivery_method',
         'id_payment_method',
     ];
+
+    public function paymentDetail() {
+        return $this->belongsTo(PaymentDetail::class, 'id_payment_method');
+    }
+
+    public function orders() {
+        return $this->hasMany(Order::class, 'order_details_id');
+    }
 }

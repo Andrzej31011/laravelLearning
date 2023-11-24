@@ -6,6 +6,7 @@ use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\WeatherController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\OrdersDetailController;
             
 
 /*
@@ -39,6 +40,8 @@ Route::middleware([
     Route::get('/orders', [OrdersController::class, 'index'])->name('orders');//do usuniecia
 
     Route::get('/cart', [CartController::class, 'showCart'])->name('showCart');
+    Route::get('/orders_detail', [OrdersDetailController::class, 'index'])->name('ordersDetail.index');
+
 
     Route::post('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('addToCart');
     Route::get('/clear-cart', [CartController::class, 'clearCart'])->name('clearCart');
