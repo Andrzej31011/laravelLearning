@@ -15,6 +15,15 @@ class Order extends Model
         'user_id',
         'service_id',
         'quantity',
-        'order_date'
+        'order_date',
+        'order_details_id',
     ];
+
+    public function service() {
+        return $this->belongsTo(Service::class, 'service_id');
+    }
+
+    public function orderDetails() {
+        return $this->belongsTo(OrdersDetail::class, 'order_details_id');
+    }
 }

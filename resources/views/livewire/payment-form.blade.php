@@ -174,16 +174,46 @@
             <div class="mt-4">
                 @if ($paymentMethod == 'blik')
                     <!-- Formularz dla Blik -->
-                    <div>
-                        <label for="blikCode" class="block text-gray-700 text-sm font-bold mb-2">Kod BLIK:</label>
-                        <input type="text" id="blikCode" wire:model="blikCode" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Wpisz kod BLIK">
+                    <div class="flex justify-center -mx-3 mb-4">
+                        <div class="w-full md:w-1/5 px-3 mb-4 md:mb-0">
+                            <label for="blikCode" class="block text-gray-700 text-sm font-bold mb-2">Kod BLIK:</label>
+                            <input type="text" id="blikCode" wire:model="blikCode" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Wpisz kod BLIK">
+                        </div>
                     </div>
                 @elseif ($paymentMethod == 'card')
                     <!-- Formularz dla Karty -->
-                    <div>
-                        <label for="cardNumber" class="block text-gray-700 text-sm font-bold mb-2">Numer Karty:</label>
-                        <input type="text" id="cardNumber" wire:model="cardNumber" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Numer Karty">
-                        <!-- Dodatkowe pola dla karty -->
+                    <div class="flex flex-wrap -mx-3 mb-4">
+                        <!-- Pole Numer karty  -->
+                        <div class="w-full md:w-2/5 px-3 mb-4 md:mb-0">
+                            <label for="cardNumber" class="block text-gray-700 text-sm font-bold mb-2">Numer Karty:</label>
+                            <input type="text" id="cardNumber" wire:model="cardNumber" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="0000 0000 0000 0000">
+                        </div>
+                    
+                        <!-- Pole Data ważności -->
+                        <div class="w-10 md:w-1/5 px-3">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="expirationDate">
+                                Data ważności
+                            </label>
+                            <input wire:model="expirationDate" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="expirationDate" type="text" placeholder="00/00">
+                        </div>
+
+                        <!-- Pole kod CCV -->
+                        <div class="w-10 md:w-1/5 px-3">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="ccv">
+                               CCV
+                            </label>
+                            <input wire:model="ccv" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="ccv" type="text" placeholder="000">
+                        </div>
+
+                        <!-- Pole Nazwisko -->
+                        <div class="w-10 md:w-1/5 px-3">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="surname">
+                                Nazwisko na karcie
+                            </label>
+                            <input wire:model="surname" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="surname" type="text" placeholder="Nazwisko">
+                        </div>
+                        
+                       
                     </div>
                 @endif
             </div>
