@@ -13,10 +13,6 @@ class OrdersDetailController extends Controller
         $userId = auth()->id(); // Pobierz ID zalogowanego użytkownika
         $finalOrderDetails = PaymentDetail::with('ordersDetails.orders.service')
                         ->get();
-        #$orders = Order::with('service', 'orderDetails.paymentDetail')
-         #              ->where('user_id', $userId)
-         #              ->get();
-
         return view('ordersDetail.index', compact('finalOrderDetails'));
     }
 }
