@@ -2,9 +2,9 @@
     <div>
         @if($stationContent)
             <!-- wyświetlanie danych pogodowych -->
-            @foreach ($stationContent as $data)
+            {{-- @foreach ($stationContent as $data)
                 <div>Nazwa: {{ $data['name'] }} Latitude: {{ $data['latitude'] }} Longitude: {{ $data['longitude'] }}</div>
-            @endforeach
+            @endforeach --}}
             <div class="mt-4 m-5">
                 <div id="mapid" style="height: 500px;" class="w-full"></div>
             </div>
