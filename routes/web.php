@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\WeatherController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrdersDetailController;
+use App\Models\User;
             
 
 /*
@@ -30,7 +31,8 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $user = User::with(['orders.orderDetails', 'orders.service'])->find(Auth::id());
+        return view('dashboard', compact('user'));
     })->name('dashboard');
 
     Route::get('/services', [ServiceController::class, 'index'])->name('services');
