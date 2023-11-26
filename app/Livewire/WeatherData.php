@@ -53,8 +53,8 @@ class WeatherData extends Component
             foreach($this->meteorogicalData as $data){
                 // Dodawanie danych meteorologicznych jako część wpisu stacji
                 $this->stationContent[$station['id']]['meteorologicalData'][] = [
-                    'measurementDate' => $data['measurementDate'],
-                    'airTemperature' => $data['airTemperature'],
+                    'measurementDate' => $data['measurementDate'] ?? null,
+                    'airTemperature' => $data['airTemperature'] ?? null,
                     'relativeHumidity' => $data['relativeHumidity'] ?? null,
                     'windSpeed' => $data['windSpeed'] ?? null,
                     'windDirection' => $data['windDirection'] ?? null,
