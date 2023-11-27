@@ -50,19 +50,21 @@ class WeatherData extends Component
             //Pobieranie danych meteorologicznych
             $this->getMeteorogicalData($station['id'], 1);
             #dd($this->meteorogicalData);
-            foreach($this->meteorogicalData as $data){
-                // Dodawanie danych meteorologicznych jako część wpisu stacji
-                $this->stationContent[$station['id']]['meteorologicalData'][] = [
-                    'measurementDate' => $data['measurementDate'] ?? null,
-                    'airTemperature' => $data['airTemperature'] ?? null,
-                    'relativeHumidity' => $data['relativeHumidity'] ?? null,
-                    'windSpeed' => $data['windSpeed'] ?? null,
-                    'windDirection' => $data['windDirection'] ?? null,
-                    'airPressure' => $data['airPressure'] ?? null,
-                    'precipitation' => $data['precipitation'] ?? null,
-                    'soilTemp' => $data['soilTemp0_05'] ?? null,
-                    'soilTempDepth' => $data['soilTempDepth0_1'] ?? null
-                ];
+            if($this->meteorogicalData){
+                foreach($this->meteorogicalData as $data){
+                    // Dodawanie danych meteorologicznych jako część wpisu stacji
+                    $this->stationContent[$station['id']]['meteorologicalData'][] = [
+                        'measurementDate' => $data['measurementDate'] ?? null,
+                        'airTemperature' => $data['airTemperature'] ?? null,
+                        'relativeHumidity' => $data['relativeHumidity'] ?? null,
+                        'windSpeed' => $data['windSpeed'] ?? null,
+                        'windDirection' => $data['windDirection'] ?? null,
+                        'airPressure' => $data['airPressure'] ?? null,
+                        'precipitation' => $data['precipitation'] ?? null,
+                        'soilTemp' => $data['soilTemp0_05'] ?? null,
+                        'soilTempDepth' => $data['soilTempDepth0_1'] ?? null
+                    ];
+                }
             }
         }
     }
