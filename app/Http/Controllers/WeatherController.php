@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WeatherController extends Controller
 {
@@ -11,7 +12,27 @@ class WeatherController extends Controller
      */
     public function index()
     {
-        return view('map.index');
+        // Pobierz zalogowanego użytkownika
+        $user = Auth::user();
+
+        // Pobierz zamówienia użytkownika
+        $orders = $user->orders()->with('service')->get();
+
+        // Stwórz listę usług z zamówień
+        $services = $orders->map(function ($order) {
+            return $order->service;
+        });
+
+        // Sprawdź, czy istnieje usługa o nazwie 'Pogoda'
+        $hasWeatherService = $services->contains(function ($service) {
+            return $service->name === 'Pogoda';
+        });
+
+        if($hasWeatherService) {
+            return view('map.index');
+        }else{
+            return view('map.auth');
+        }
     }
 
     /**

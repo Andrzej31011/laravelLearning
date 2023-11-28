@@ -8,6 +8,9 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
+                @if($finalOrderDetails->isEmpty())
+                    <p class="m-5">Brak zamówien.</p>
+                @endif
                 @foreach ($finalOrderDetails as $paymentMethod)
                     <div class="bg-white shadow-md rounded-lg overflow-hidden my-5 hover:shadow-lg transition-shadow duration-300 m-5">
                         {{-- Zakomentowany kod: <h3>Metoda płatności: {{ $paymentMethod->payment_method }}</h3> --}}
