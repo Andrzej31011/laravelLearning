@@ -1,5 +1,4 @@
 <?php
-// resources/lang/pl/validation.php
 
 return [
     'required' => 'Pole :attribute jest wymagane.',
@@ -10,8 +9,22 @@ return [
         'password' => 'hasło',
         'name' => 'nick',
         'voievodeship' => 'województwo',
-        'shoe_number' => 'numer buta'
-        // Dodaj inne pola, jeśli są potrzebne
+        'shoe_number' => 'numer buta',
+        'fullName' => 'imię i nazwisko',
+        'city' => 'miasto',
+        'street' => 'ulica',
+        'houseNumber' => 'numer domu',
+        'apartment_number' => 'numer mieszkania',
+        'postalCode' => 'kod pocztowy',
+        'phone' => 'numer telefonu',
+        'postOffice' => 'poczta',
+        'deliveryMethod' => 'metoda dostawy',
+        'paymentMethod' => 'metoda płatności',
+        'password_confirmation' => 'powtórz hasło',
+        'old_password' => 'stare hasło',
+        'new_password' => 'nowe hasło',
+        'new_password_confirmation' => 'powtórz nowe hasło',
+        'current_password' => 'bieżące hasło',
     ],
 ];
 ?>

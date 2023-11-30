@@ -23,14 +23,10 @@
                         @foreach ($orders as $order)
                             <div class="p-2 border-b border-gray-100">
                                 <p class="text-gray-600">Usługa: {{ $order->service->name }}</p>
-                                {{-- Możesz dodać więcej szczegółów o usłudze tutaj --}}
                             </div>
                         @endforeach
                     </div>
                 @endforeach
-
-                {{-- Tutaj może być link do historii zamówień --}}
-                {{-- <a href="{{ route('order_history') }}" class="text-blue-500 hover:text-blue-700 transition duration-300">Zobacz pełną historię zamówień</a> --}}
 
             </div>
         </div>

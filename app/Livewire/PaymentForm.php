@@ -13,7 +13,7 @@ class PaymentForm extends Component
 {
     protected $listeners = ['paymentMethod' => '$refresh'];
 
-    public $name;
+    public $fullName;
     public $email;
     public $phone;
     public $city;
@@ -46,24 +46,24 @@ class PaymentForm extends Component
         return view('livewire.payment-form');
     }
 
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName, [
-            'name' => 'required',
-            'email' => 'required|email',
-            // inne reguły walidacji
-        ]);
-    }
-
     public function processPayment()
     {
          //Walidacja danych
          $this->validate([
-             'name' => 'required',
+             'fullName' => 'required',
              'email' => 'required|email',
              'phone' => 'required',
-             // inne reguły walidacji
+             'city' => 'required',
+             'street' => 'required',
+             'houseNumber' => 'required',
+             'apartmentNumber' => 'nullable',
+             'postalCode' => 'required',
+             'postOffice' => 'required',
+             'deliveryMethod' => 'required',
+             'paymentMethod' => 'required',
          ]);
+
+
 
          foreach ($this->cart as $item) {
             $this->price += $item['price']*$item['quantity'];
@@ -80,7 +80,7 @@ class PaymentForm extends Component
 
 
         $ordersDetail = OrdersDetail::create([
-            'name' => $this->name,
+            'name' => $this->fullName,
             'email' => $this->email,
             'phone' => $this->phone,
             'city' => $this->city,
@@ -104,10 +104,8 @@ class PaymentForm extends Component
             ]);
         }
 
-        
-
         // Przekierowanie do strony głównej
         session()->forget('cart');
-        return redirect('/dashboard');
+        return redirect('/dashboard')->with('success', 'Pomyślnie zrealizowano zakup');;
     }
 }

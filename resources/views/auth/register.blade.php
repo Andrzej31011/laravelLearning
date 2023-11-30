@@ -4,19 +4,19 @@
             <x-authentication-card-logo />
         </x-slot>
 
-        <x-validation-errors class="mb-4" />
-
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
             <div>
                 <x-label for="name" value="{{ __('Nick') }}" />
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" autofocus autocomplete="name" />
+                <x-input-error for="name" class="mt-2" />
             </div>
 
             <div class="mt-4">
                 <x-label for="email" value="{{ __('Email') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" autocomplete="username" />
+                <x-input-error for="email" class="mt-2" />
             </div>
 
             <div class="mt-4">
@@ -26,6 +26,7 @@
                     <option value="1">Dolnośląskie</option>
                     <option value="2">Kujawsko-pomorskie</option>
                 </x-select>
+                <x-input-error for="voievodeship" class="mt-2" />
             </div>
 
             <div class="mt-4" x-data="{pw: ''}"">
@@ -42,17 +43,13 @@
                     <span class="h-1 w-1/3 rounded"
                           x-bind:class="pw.length > 8 && pw.match(/[!@#$%^&*(),.?:{}|<>]/) ? 'bg-green-300' : 'bg-gray-200'"></span>
                 </div>
+                <x-input-error for="password" class="mt-2" />
             </div>
-
-           
-
-                
-
-                
 
             <div class="mt-4">
                 <x-label for="password_confirmation" value="{{ __('Potwierdź hasło') }}" />
                 <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" autocomplete="new-password" />
+                <x-input-error for="password_confirmation" class="mt-2" />
             </div>
 
             <div class="mt-4">

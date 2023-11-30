@@ -5,3 +5,31 @@
 [x-cloak] {
     display: none;
 }
+
+#flash-message {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background-color: rgb(3, 177, 3);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    z-index: 1000;
+}
+
+.pagination {
+    display: flex;
+    flex-direction: column; /* Zmień kierunek na pionowy */
+    align-items: center; /* Wyśrodkuj elementy */
+    padding: 10px; /* Dodaj odstępy */
+}
+
+.pagination ul {
+    margin-bottom: 5px; /* Dodaj margines między przyciskami a numerami stron */
+}
+
+.pagination li {
+    margin: 0 3px; /* Dodaj odstępy między elementami paginacji */
+}
+

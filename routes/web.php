@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\WeatherController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrdersDetailController;
+use App\Http\Controllers\DashboardController;
 use App\Models\User;
             
 
@@ -30,16 +31,12 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        $user = User::with(['orders.orderDetails', 'orders.service'])->find(Auth::id());
-        return view('dashboard', compact('user'));
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->name('dashboard');
 
     Route::get('/services', [ServiceController::class, 'index'])->name('services');
     Route::post('/services', [ServiceController::class, 'store'])->name('services.store');
     Route::get('services/export/', [ServiceController::class, 'export'])->name('services.export');
-
-    Route::get('/orders', [OrdersController::class, 'index'])->name('orders');//do usuniecia
 
     Route::get('/cart', [CartController::class, 'showCart'])->name('showCart');
     Route::get('/orders_detail', [OrdersDetailController::class, 'index'])->name('ordersDetail.index');
@@ -53,6 +50,9 @@ Route::middleware([
 
     //Mapy
     Route::get('/map', [WeatherController::class, 'index'])->name('weather');
+
+    //PDF
+    Route::get('/generate-pdf/{id}', [OrdersDetailController::class, 'generatePdf'])->name('generate-pdf');
 
     
 

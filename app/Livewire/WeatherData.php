@@ -10,6 +10,8 @@ class WeatherData extends Component
     public $meteoStation;
     public $meteorogicalData;
     public $stationContent = [];
+    public $selectedStation;
+    public $stationDataForMap = [];
 
     public function render()
     {
@@ -22,7 +24,7 @@ class WeatherData extends Component
 
     public function getMeteoStation()
     {
-        $response = Http::get('https://dev.edwin.pcss.pl/api/meteo/v3/observationStation?page=0&size=20');
+        $response = Http::get('https://dev.edwin.pcss.pl/api/meteo/v3/observationStation?page=0&size=1000');
         if ($response->successful()) {
             $this->meteoStation = $response['content'];
         }
@@ -46,26 +48,15 @@ class WeatherData extends Component
                 'stationType' => $station['stationType'],
                 'stationStatus' => $station['stationStatus']
             ];
-            
-            //Pobieranie danych meteorologicznych
-            $this->getMeteorogicalData($station['id'], 1);
-            #dd($this->meteorogicalData);
-            if($this->meteorogicalData){
-                foreach($this->meteorogicalData as $data){
-                    // Dodawanie danych meteorologicznych jako część wpisu stacji
-                    $this->stationContent[$station['id']]['meteorologicalData'][] = [
-                        'measurementDate' => $data['measurementDate'] ?? null,
-                        'airTemperature' => $data['airTemperature'] ?? null,
-                        'relativeHumidity' => $data['relativeHumidity'] ?? null,
-                        'windSpeed' => $data['windSpeed'] ?? null,
-                        'windDirection' => $data['windDirection'] ?? null,
-                        'airPressure' => $data['airPressure'] ?? null,
-                        'precipitation' => $data['precipitation'] ?? null,
-                        'soilTemp' => $data['soilTemp0_05'] ?? null,
-                        'soilTempDepth' => $data['soilTempDepth0_1'] ?? null
-                    ];
-                }
-            }
         }
     }
+
+    public function updateMap()
+    {
+        $stationData = $this->stationContent[$this->selectedStation] ?? null;
+        $this->getMeteorogicalData($this->selectedStation, 1);
+        $stationFinalData = array_merge($stationData, $this->meteorogicalData[0]);
+        $this->dispatch('mapUpdated', ['stationData' => $stationFinalData]);
+    }
+
 }

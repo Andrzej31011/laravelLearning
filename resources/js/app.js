@@ -44,3 +44,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const flashMessage = document.getElementById('flash-message');
+    if (flashMessage) {
+        flashMessage.style.display = 'block';
+        setTimeout(function() {
+            flashMessage.style.display = 'none';
+        }, 3000); // Komunikat zostanie ukryty po 3 sekundach
+    }
+});
+

@@ -39,6 +39,13 @@
             </main>
         </div>
 
+        @if(session('success'))
+            <div id="flash-message" style="display: none;">
+                {{ session('success') }}
+            </div>
+        @endif
+
+
         @stack('modals')
 
         @livewireScripts
