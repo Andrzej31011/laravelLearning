@@ -2,11 +2,14 @@
     <div>
         @if($stationContent)
             <!-- wyświetlanie danych pogodowych -->
-            {{-- @foreach ($stationContent as $data)
-                <div>Nazwa: {{ $data['name'] }} Latitude: {{ $data['latitude'] }} Longitude: {{ $data['longitude'] }}</div>
-            @endforeach --}}
-            <div class="mt-4 m-5">
-                <div id="mapid" style="height: 500px;" class="w-full"></div>
+            <select wire:model="selectedStation" wire:change="updateMap" class="m-5">
+                <option value="">Wybierz stację</option>
+                @foreach($stationContent as $id => $station)
+                    <option value="{{ $id }}">{{ $station['name'] }}</option>
+                @endforeach
+            </select>
+            <div class="relative mt-4 m-5 z-0">
+                <div wire:ignore id="mapid" style="height: 900px;" class="w-full"></div>
             </div>
         @endif
     </div>
@@ -25,31 +28,48 @@
     document.addEventListener('DOMContentLoaded', () => {
         console.log('Loaded');
         var locations = @json($stationContent);
-        
-        console.log(locations);
+    
         
         Object.values(locations).forEach(function (location) {
             // Tworzenie treści dymku
             let popupContent = '<b>Szczegóły lokalizacji:</b> ' + location.name;
         
-            // Sprawdzanie, czy istnieją dane meteorologiczne
-            if (location.meteorologicalData && location.meteorologicalData.length > 0) {
-                // Przejście przez wszystkie dane meteorologiczne
-                location.meteorologicalData.forEach(function(data) {
-                    popupContent += '<br><b>Data pomiaru:</b> ' + data.measurementDate;
-                    popupContent += '<br><b>Temperatura powietrza:</b> ' + data.airTemperature + '°C';
-                    popupContent += '<br><b>Wilgotność względna:</b> ' + (data.relativeHumidity || 'brak danych');
-                    // Dodaj tutaj więcej informacji meteorologicznych w razie potrzeby
-                });
-            } else {
-                popupContent += '<br>Brak danych meteorologicznych.';
-            }
+            popupContent += '<br>Brak danych meteorologicznych - wybierz stację z listy.';
         
             // Dodawanie markera z dymkiem
             L.marker([location.latitude, location.longitude])
                 .addTo(map)
                 .bindPopup(popupContent);
         });
+
+        window.Livewire.on('mapUpdated', (data) => {
+            if (data && data.length > 0 && data[0].stationData) {
+                updateMapWithSelectedStation(data[0].stationData);
+            } else {
+                console.error("Brak poprawnych danych stacji");
+            }
+        });
     });
-    // Opcjonalnie: Dodaj markery, kształty itp.
+    
+    var currentMarker; // Globalna zmienna do przechowywania aktualnego markera
+
+    function updateMapWithSelectedStation(stationData) {
+        let popupContent = '<b>Szczegóły stacji:</b> ' + stationData.name;
+        popupContent += '<br><b>Data pomiaru:</b> ' + stationData.measurementDate;
+        popupContent += '<br><b>Temperatura powietrza:</b> ' + stationData.airTemperature + '°C';
+        popupContent += '<br><b>Wilgotność:</b> ' + (stationData.relativeHumidity || 'brak danych');
+
+        // Sprawdź, czy są dane geograficzne
+        if (stationData && stationData.latitude && stationData.longitude) {
+            // Dodaj nowy marker
+            currentMarker = L.marker([stationData.latitude, stationData.longitude])
+                .addTo(map)
+                .bindPopup(popupContent);
+
+            // Ustaw mapę na nową lokalizację
+            map.setView([stationData.latitude, stationData.longitude], 13);
+        } else {
+            console.error("Brak danych geograficznych dla stacji");
+        }
+    }
 </script>

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
-{//spiner, żeby było widać że coś sie laduje
+{
     use HasFactory;
 
     protected $table = 'orders';

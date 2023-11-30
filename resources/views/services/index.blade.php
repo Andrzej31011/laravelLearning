@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
                 <x-button class="ml-4 m-5">
-                    <a href="{{ route('services.export') }}" class="btn btn-success">Export Excel</a>
+                    <a href="{{ route('services.export') }}" class="btn btn-success">Export usług</a>
                 </x-button>
                 <hr>
                 
@@ -26,13 +26,10 @@
                                     <i class="bi bi-cart2"></i>Dodaj do koszyka
                                 </button>
                             </form>
-                            {{-- <a href="{{ route('addToCart', $service->id) }}" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-full">
-                                <i class="bi bi-cart2"></i>Dodaj do koszyka
-                            </a> --}}
                         </div>
                     @endforeach
                 </div>
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="flex justify-center">{{ $services->links('vendor.pagination.tailwind') }}</div>
         </div>
     </div>
 </x-app-layout>

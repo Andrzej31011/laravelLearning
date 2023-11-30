@@ -17,18 +17,20 @@
             <div class="flex flex-wrap -mx-3 mb-4">
                 <!-- Pole Imię i Nazwisko -->
                 <div class="w-full md:w-1/3 px-3 mb-4 md:mb-0">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="fullName">
                         Imię i Nazwisko
                     </label>
-                    <input wire:model="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Imię i Nazwisko">
+                    <input wire:model="fullName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Imię i Nazwisko">
+                    <x-input-error for="fullName" class="mt-2" />
                 </div>
             
                 <!-- Pole Email -->
                 <div class="w-full md:w-1/3 px-3">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-                        Email
+                        Adres email
                     </label>
                     <input wire:model="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email">
+                    <x-input-error for="email" class="mt-2" />
                 </div>
 
                 <!-- Pole Numeru Telefonu -->
@@ -37,6 +39,7 @@
                         Numer Telefonu
                     </label>
                     <input wire:model="phone" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" type="tel" placeholder="Numer Telefonu">
+                    <x-input-error for="phone" class="mt-2" />
                 </div>
             </div>
 
@@ -49,18 +52,21 @@
                         Miasto
                     </label>
                     <input wire:model="city" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="city" type="text" placeholder="Miasto">
+                    <x-input-error for="city" class="mt-2" />
                 </div>
                 <div class="w-full md:w-1/4 px-3">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="street">
                         Ulica
                     </label>
                     <input wire:model="street" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="street" type="text" placeholder="Ulica">
+                    <x-input-error for="street" class="mt-2" />
                 </div>
                 <div class="w-full md:w-1/4 px-3 mb-4 md:mb-0">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="houseNumber">
                         Numer Domu
                     </label>
                     <input wire:model="houseNumber" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="houseNumber" type="text" placeholder="Numer Domu">
+                    <x-input-error for="houseNumber" class="mt-2" />
                 </div>
                 <div class="w-full md:w-1/4 px-3">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="apartmentNumber">
@@ -80,12 +86,14 @@
                         Kod Pocztowy
                     </label>
                     <input wire:model="postalCode" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="postalCode" type="text" placeholder="Kod Pocztowy">
+                    <x-input-error for="postalCode" class="mt-2" />
                 </div>
                 <div class="w-full md:w-1/2 px-3">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="postOffice">
                         Poczta
                     </label>
                     <input wire:model="postOffice" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="postOffice" type="text" placeholder="Poczta">
+                    <x-input-error for="postOffice" class="mt-2" />
                 </div>
             </div>
 
@@ -128,6 +136,7 @@
                         <span class="text-sm text-gray-600">0,00 zł</span>
                     </label>
                 </div>
+                <div class="flex justify-center space-x-4"><x-input-error for="deliveryMethod" class="mt-2" /></div>
             </div>
 
             <!-- Sekcja Wybór Sposobu Płatności -->
@@ -167,6 +176,7 @@
                         <span class="text-md">Płatność przy Odbiorze</span>
                     </label>
                 </div>
+                <div class="flex justify-center space-x-4"><x-input-error for="paymentMethod" class="mt-2" /></div>
             </div>
 
 
@@ -178,6 +188,7 @@
                         <div class="w-full md:w-1/5 px-3 mb-4 md:mb-0">
                             <label for="blikCode" class="block text-gray-700 text-sm font-bold mb-2">Kod BLIK:</label>
                             <input type="text" id="blikCode" wire:model="blikCode" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Wpisz kod BLIK">
+                            @error('blikCode') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
                     </div>
                 @elseif ($paymentMethod == 'card')
@@ -187,6 +198,7 @@
                         <div class="w-full md:w-2/5 px-3 mb-4 md:mb-0">
                             <label for="cardNumber" class="block text-gray-700 text-sm font-bold mb-2">Numer Karty:</label>
                             <input type="text" id="cardNumber" wire:model="cardNumber" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="0000 0000 0000 0000">
+                            @error('cardNumber') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
                     
                         <!-- Pole Data ważności -->
@@ -195,6 +207,7 @@
                                 Data ważności
                             </label>
                             <input wire:model="expirationDate" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="expirationDate" type="text" placeholder="00/00">
+                            @error('expirationDate') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
 
                         <!-- Pole kod CCV -->
@@ -203,6 +216,7 @@
                                CCV
                             </label>
                             <input wire:model="ccv" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="ccv" type="text" placeholder="000">
+                            @error('ccv') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
 
                         <!-- Pole Nazwisko -->
@@ -211,6 +225,7 @@
                                 Nazwisko na karcie
                             </label>
                             <input wire:model="surname" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="surname" type="text" placeholder="Nazwisko">
+                            @error('surname') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
                         
                        
