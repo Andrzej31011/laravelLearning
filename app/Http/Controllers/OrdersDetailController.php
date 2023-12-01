@@ -21,15 +21,15 @@ class OrdersDetailController extends Controller
     }
 
     public function generatePdf($id)
-{
-    $orderDetails = PaymentDetail::with('ordersDetails.orders.service')
-                    ->whereHas('ordersDetails', function ($query) use ($id) {
-                        $query->where('id', $id);
-                    })
-                    ->get();
-    $pdf = Pdf::loadView('orders.pdf.order', [
-        'orderDetails' => $orderDetails
-    ]);
-    return $pdf->download('faktura.pdf');
-}
+    {
+        $orderDetails = PaymentDetail::with('ordersDetails.orders.service')
+                        ->whereHas('ordersDetails', function ($query) use ($id) {
+                            $query->where('id', $id);
+                        })
+                        ->get();
+        $pdf = Pdf::loadView('orders.pdf.order', [
+            'orderDetails' => $orderDetails
+        ]);
+        return $pdf->download('faktura.pdf');
+    }
 }

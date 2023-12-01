@@ -8,21 +8,24 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use App\Models\PaymentDetail;
 
 class OrderConfirmationEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $orderDetails;
-    protected $paymentDetails;
+    protected $finalOrderDetails;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($orderDetails, $paymentDetails)
+    public function __construct($id)
     {
-        $this->orderDetails = $orderDetails;
-        $this->paymentDetails = $paymentDetails;
+        $this->finalOrderDetails = PaymentDetail::with('ordersDetails.orders.service')
+            ->whereHas('ordersDetails', function ($query) use ($id) {
+                $query->where('id', $id);
+            })
+            ->get();
     }
 
     /**
@@ -43,8 +46,7 @@ class OrderConfirmationEmail extends Mailable
         return new Content(
             view: 'emails.order-confirmation',
             with: [
-                'orderDetails' => $this->orderDetails,
-                'paymentDetails' => $this->paymentDetails
+                'finalOrderDetails' => $this->finalOrderDetails
             ],
         );
     }

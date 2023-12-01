@@ -80,7 +80,6 @@ class PaymentForm extends Component
             'cost' => $this->price
         ]);
 
-
         $ordersDetail = OrdersDetail::create([
             'name' => $this->fullName,
             'email' => $this->email,
@@ -106,7 +105,7 @@ class PaymentForm extends Component
             ]);
         }
 
-        Mail::to('andrzej.zakowski@wodr.poznan.pl')->send(new OrderConfirmationEmail($ordersDetail, $paymentDetail));
+        Mail::to(auth()->user()->email)->send(new OrderConfirmationEmail($ordersDetail->id));
         // Przekierowanie do strony głównej
         session()->forget('cart');
         return redirect('/dashboard')->with('success', 'Pomyślnie zrealizowano zakup');;
