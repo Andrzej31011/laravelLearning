@@ -7,6 +7,8 @@ use App\Models\Order;
 use App\Models\OrdersDetail;
 use App\Models\PaymentDetail;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\OrderConfirmationEmail;
+use Illuminate\Support\Facades\Mail;
 
 
 class PaymentForm extends Component
@@ -104,6 +106,7 @@ class PaymentForm extends Component
             ]);
         }
 
+        Mail::to('andrzej.zakowski@wodr.poznan.pl')->send(new OrderConfirmationEmail($ordersDetail, $paymentDetail));
         // Przekierowanie do strony głównej
         session()->forget('cart');
         return redirect('/dashboard')->with('success', 'Pomyślnie zrealizowano zakup');;
