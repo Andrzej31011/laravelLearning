@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Szczegóły Zamówienia</title>
     <style>
+       @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+
         body {
             font-family: 'Roboto', sans-serif;
             background-color: #fff;
@@ -36,11 +39,6 @@
             color: #2d3031;
             font-size: 22px;
             margin-bottom: 10px;
-        }
-        .section p {
-            font-size: 16px;
-            line-height: 1.5;
-            margin: 5px 0;
         }
         .total {
             font-weight: bold;
