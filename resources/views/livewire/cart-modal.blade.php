@@ -3,6 +3,7 @@
 @endphp
 <div>
     @if($isOpen)
+    <div @click.away="$wire.closeModal()" class="fixed top-0 left-0 w-full h-full z-40"></div>
     <div class="fixed top-0 right-0 z-50 w-full h-1/3 flex justify-end">
         <div class="bg-slate-100 p-6 rounded-lg shadow-lg m-4 mt-12 w-3/4 md:w-1/3">
             <!-- Zawartość koszyka -->
@@ -43,7 +44,7 @@
                     </x-button>
                 @endif
             </div>
-        </div>
+        </div>    
     </div>
     @endif
     <button wire:click="openModal"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">

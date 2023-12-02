@@ -7,10 +7,19 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
+use App\Services\EmailVerificationService;
+use Illuminate\Validation\ValidationException;
+
 
 class CreateNewUser implements CreatesNewUsers
 {
     use PasswordValidationRules;
+    protected $emailVerification;
+
+    public function __construct(EmailVerificationService $emailVerification)
+    {
+        $this->emailVerification = $emailVerification;
+    }
 
     /**
      * Validate and create a newly registered user.
@@ -19,6 +28,13 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input): User
     {
+        $isValidEmail = $this->emailVerification->verifyEmail($input['email']);
+
+        if (!$isValidEmail) {
+            throw ValidationException::withMessages(['email' => 'Podany adres email jest nieprawidłowy lub nie istnieje.']);
+        }
+        
+
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],

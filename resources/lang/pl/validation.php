@@ -27,6 +27,7 @@ return [
             'required_if' => 'Pole kod blik jest wymagane, gdy metoda płatności to blik.',
         ]
     ],
+    'unique' => 'Podany :attribute został już zajęty.',
     'attributes' => [
         'email' => 'adres email',
         'password' => 'hasło',

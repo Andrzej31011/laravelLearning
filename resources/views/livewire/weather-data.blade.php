@@ -13,7 +13,7 @@
             </div>
             <div wire:loading>
                 @livewire('spinner')
-            </div>               
+            </div>        
         @endif
     </div>
 </div>
