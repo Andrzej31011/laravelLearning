@@ -11,6 +11,9 @@
             <div class="relative mt-4 m-5 z-0">
                 <div wire:ignore id="mapid" style="height: 900px;" class="w-full"></div>
             </div>
+            <div wire:loading>
+                @livewire('spinner')
+            </div>               
         @endif
     </div>
 </div>

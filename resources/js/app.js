@@ -1,5 +1,9 @@
 import './bootstrap';
 import zxcvbn from 'zxcvbn';
+import Alpine from 'alpinejs';
+import focus from '@alpinejs/focus';
+
+Alpine.plugin(focus);
 
 document.addEventListener('DOMContentLoaded', function () {
     const passwordInput = document.getElementById('password');
@@ -54,4 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 3000); // Komunikat zostanie ukryty po 3 sekundach
     }
 });
+
+
+
 

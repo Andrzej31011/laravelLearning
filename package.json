@@ -16,6 +16,8 @@
         "vite": "^4.5.0"
     },
     "dependencies": {
+        "@alpinejs/focus": "^3.13.3",
+        "alpinejs": "^3.13.3",
         "bootstrap-icons": "^1.11.1",
         "zxcvbn": "^4.4.2"
     }
