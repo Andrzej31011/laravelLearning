@@ -25,9 +25,13 @@ return [
         ],
         'blikCode' => [
             'required_if' => 'Pole kod blik jest wymagane, gdy metoda płatności to blik.',
-        ]
+        ],
     ],
     'unique' => 'Podany :attribute został już zajęty.',
+    'min' => [
+        'string' => 'Pole :attribute musi mieć co najmniej :min znaków.',
+    ],
+    'uncompromised' => 'Podane hasło zostało wykryte w przecieku danych. Proszę wybrać inne hasło.',
     'attributes' => [
         'email' => 'adres email',
         'password' => 'hasło',
