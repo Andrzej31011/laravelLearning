@@ -28,11 +28,11 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input): User
     {
-        // $isValidEmail = $this->emailVerification->verifyEmail($input['email']);
+        $isValidEmail = $this->emailVerification->verifyEmail($input['email']);
 
-        // if (!$isValidEmail) {
-        //     throw ValidationException::withMessages(['email' => 'Podany adres email jest nieprawidłowy lub nie istnieje.']);
-        // }
+        if (!$isValidEmail) {
+            throw ValidationException::withMessages(['email' => 'Podany adres email jest nieprawidłowy lub nie istnieje.']);
+        }
         
 
         Validator::make($input, [
