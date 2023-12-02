@@ -24,14 +24,17 @@ class WeatherData extends Component
 
     public function getMeteoStation()
     {
-        $response = Http::get('https://dev.edwin.pcss.pl/api/meteo/v3/observationStation?page=0&size=1000');
+        $url = config('api.meteo_station_api_url');
+        $response = Http::get($url);
         if ($response->successful()) {
             $this->meteoStation = $response['content'];
         }
     }
 
-    public function getMeteorogicalData($id_station, $size){
-        $response = Http::get('https://dev.edwin.pcss.pl/api/meteo/v3/meteoadv/stations?ids='.$id_station.'&page=0&size='.$size);
+    public function getMeteorogicalData($id_station, $size)
+    {
+        $url = config('api.meteorogical_data_api_url') . "?ids={$id_station}&page=0&size={$size}";
+        $response = Http::get($url);
         if ($response->successful()) {
             $this->meteorogicalData = $response['content'];
         }
@@ -55,7 +58,7 @@ class WeatherData extends Component
     {
         $stationData = $this->stationContent[$this->selectedStation] ?? null;
         $this->getMeteorogicalData($this->selectedStation, 1);
-        $stationFinalData = $this->meteorogicalData[0] != null ? array_merge($stationData, $this->meteorogicalData[0]) : array_merge($stationData, $this->meteorogicalData);
+        $stationFinalData = !empty($this->meteorogicalData[0]) ? array_merge($stationData, $this->meteorogicalData[0]) : array_merge($stationData, $this->meteorogicalData);
         $this->dispatch('mapUpdated', ['stationData' => $stationFinalData]);
     }
 
