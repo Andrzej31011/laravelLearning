@@ -55,7 +55,7 @@ class WeatherData extends Component
     {
         $stationData = $this->stationContent[$this->selectedStation] ?? null;
         $this->getMeteorogicalData($this->selectedStation, 1);
-        $stationFinalData = array_merge($stationData, $this->meteorogicalData[0]);
+        $stationFinalData = $this->meteorogicalData[0] != null ? array_merge($stationData, $this->meteorogicalData[0]) : array_merge($stationData, $this->meteorogicalData);
         $this->dispatch('mapUpdated', ['stationData' => $stationFinalData]);
     }
 

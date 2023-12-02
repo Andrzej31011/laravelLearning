@@ -85,7 +85,17 @@
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="postalCode">
                         Kod Pocztowy
                     </label>
-                    <input wire:model="postalCode" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="postalCode" type="text" placeholder="Kod Pocztowy">
+                    <div x-data="{ postalCode: '' }">
+                        <input 
+                            x-model="postalCode"
+                            x-on:input="postalCode = postalCode.replace(/\D/g, '').replace(/(\d{2})(?=\d)/, '$1-').slice(0, 6)"
+                            type="text" 
+                            id="postalCode" 
+                            wire:model="postalCode" 
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                            placeholder="Kod Pocztowy" 
+                            maxlength="6">
+                    </div>                    
                     <x-input-error for="postalCode" class="mt-2" />
                 </div>
                 <div class="w-full md:w-1/2 px-3">
@@ -187,7 +197,17 @@
                     <div class="flex justify-center -mx-3 mb-4">
                         <div class="w-full md:w-1/5 px-3 mb-4 md:mb-0">
                             <label for="blikCode" class="block text-gray-700 text-sm font-bold mb-2">Kod BLIK:</label>
-                            <input type="text" id="blikCode" wire:model="blikCode" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Wpisz kod BLIK">
+                            <div x-data="{ blikCode: '', isCorrectLength: false }">
+                                <input 
+                                    x-model="blikCode"
+                                    x-on:input="blikCode = blikCode.replace(/\D/g, '').slice(0, 6); isCorrectLength = blikCode.length === 6"
+                                    type="text" 
+                                    id="blikCode" 
+                                    wire:model="blikCode"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                    placeholder="Wpisz kod BLIK" 
+                                    maxlength="6">
+                            </div>                                                   
                             @error('blikCode') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
                     </div>
@@ -197,7 +217,17 @@
                         <!-- Pole Numer karty  -->
                         <div class="w-full md:w-2/5 px-3 mb-4 md:mb-0">
                             <label for="cardNumber" class="block text-gray-700 text-sm font-bold mb-2">Numer Karty:</label>
-                            <input type="text" id="cardNumber" wire:model="cardNumber" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="0000 0000 0000 0000">
+                            <div x-data="{ cardNumber: '', isCorrectLength: false }">
+                                <input 
+                                    x-model="cardNumber"
+                                    x-on:input="cardNumber = cardNumber.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim(); isCorrectLength = cardNumber.length === 19"
+                                    type="text" 
+                                    id="cardNumber" 
+                                    wire:model="cardNumber" 
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                    placeholder="0000 0000 0000 0000" 
+                                    maxlength="19">
+                            </div>
                             @error('cardNumber') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
                     
@@ -206,7 +236,16 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="expirationDate">
                                 Data ważności
                             </label>
-                            <input wire:model="expirationDate" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="expirationDate" type="text" placeholder="00/00">
+                            <div x-data="{ expirationDate: @entangle('expirationDate'), isCorrectLength: false }">
+                                <input 
+                                    x-model="expirationDate"
+                                    x-on:input="expirationDate = expirationDate.replace(/[^0-9]/g, '').replace(/(\d{2})(\d{0,2})/, '$1/$2').slice(0, 5); isCorrectLength = expirationDate.length === 5"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                    id="expirationDate" 
+                                    type="text" 
+                                    placeholder="MM/YY" 
+                                    maxlength="5">
+                            </div>                                                                           
                             @error('expirationDate') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
 
@@ -215,7 +254,17 @@
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="ccv">
                                CCV
                             </label>
-                            <input wire:model="ccv" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="ccv" type="text" placeholder="000">
+                            <div x-data="{ ccv: '', isCorrectLength: false }">
+                                <input 
+                                    x-model="ccv"
+                                    x-on:input="ccv = ccv.replace(/\D/g, ''); isCorrectLength = ccv.length === 3" 
+                                    type="text" 
+                                    id="ccv" 
+                                    wire:model="ccv" 
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                    placeholder="000" 
+                                    maxlength="3">
+                            </div>                            
                             @error('ccv') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
 

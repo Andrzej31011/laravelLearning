@@ -50,20 +50,43 @@ class PaymentForm extends Component
 
     public function processPayment()
     {
+        $this->cardNumber = str_replace(' ', '', $this->cardNumber);
+
          //Walidacja danych
          $this->validate([
-             'fullName' => 'required',
-             'email' => 'required|email',
-             'phone' => 'required',
-             'city' => 'required',
-             'street' => 'required',
-             'houseNumber' => 'required',
-             'apartmentNumber' => 'nullable',
-             'postalCode' => 'required',
-             'postOffice' => 'required',
-             'deliveryMethod' => 'required',
-             'paymentMethod' => 'required',
-         ]);
+            'fullName' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'city' => 'required',
+            'street' => 'required',
+            'houseNumber' => 'required',
+            'apartmentNumber' => 'nullable',
+            'postalCode' => 'required',
+            'postOffice' => 'required',
+            'deliveryMethod' => 'required',
+            'paymentMethod' => 'required',
+            'cardNumber' => ['required_if:paymentMethod,card', function ($attribute, $value, $fail) {
+                if ($this->paymentMethod == 'card' && strlen(str_replace(' ', '', $value)) != 16) {
+                    $fail('Pole numer karty musi zawierać dokładnie 16 cyfr.');
+                }
+            }],
+            'expirationDate' => ['required_if:paymentMethod,card', function ($attribute, $value, $fail) {
+                if ($this->paymentMethod == 'card' && strlen($value) != 5) {
+                    $fail('Pole data ważności musi mieć format MM/YY.');
+                }
+            }],
+            'ccv' => ['required_if:paymentMethod,card', function ($attribute, $value, $fail) {
+                if ($this->paymentMethod == 'card' && strlen($value) != 3) {
+                    $fail('Pole CCV musi zawierać 3 cyfry.');
+                }
+            }],
+            'surname' => 'required_if:paymentMethod,card',
+            'blikCode' => ['required_if:paymentMethod,blik', function ($attribute, $value, $fail) {
+                if ($this->paymentMethod == 'blik' && strlen($value) != 6) {
+                    $fail('Pole kod BLIK musi zawierać dokładnie 6 cyfr.');
+                }
+            }]
+        ]);
 
 
 
