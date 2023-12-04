@@ -15,6 +15,7 @@
 - **Weryfikacja Email:** Hunter
 - **Export do PDF:** DOMpdf
 - **Export do Excel:** maatwebsite/excel
+- **Interakcja na mapie:** leaflet
 
 ## Funkcje Aplikacji
 
